@@ -4,5 +4,13 @@
   become: yes
   vars:
     mongo_bind_ip: 0.0.0.0
+
+  pre_tasks:
+    - name: Install dirmngr
+      apt:
+        pkg: dirmngr
+        state: present
+        update_cache: yes
+
   roles:
     - role: test
