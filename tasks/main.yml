@@ -1,0 +1,13 @@
+---
+- name: Show info about the env this host belongs to
+  debug:
+    msg: "This host is in {{ env }} environment"
+
+- name: Register MongoDB internal IP
+  debug:
+    msg: "{{ gce_private_ip }}"
+  register: db_internal_ip
+  when: gce_private_ip is defined
+
+- include: install_mongo.yml
+- include: config_mongo.yml

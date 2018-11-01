@@ -1,0 +1,27 @@
+---
+- name: Add mongodb-org repo key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com
+    id: 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
+    state: present
+  tags: mongo_install
+
+- name: Add mongodb-org repo
+  apt_repository:
+    repo: "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse"
+    update_cache: yes
+  tags: mongo_install
+
+- name: Install mongodb-org
+  apt:
+    pkg: mongodb-org
+    state: present
+    update_cache: yes
+  tags: mongo_install
+
+- name: Enable mongod service
+  service:
+    name: mongod
+    enabled: yes
+    state: started
+  tags: mongo_install
