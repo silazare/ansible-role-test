@@ -1,7 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  become: yes
+  become: true
   vars:
     mongo_bind_ip: 0.0.0.0
 
@@ -10,10 +10,10 @@
       apt:
         pkg: "{{ item }}"
         state: present
-        update_cache: yes
+        update_cache: true
       loop:
         - dirmngr
         - net-tools
 
   roles:
-    - role: test
+    - role: ansible-role-test

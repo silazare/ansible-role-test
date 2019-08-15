@@ -7,8 +7,7 @@ lint:
   name: yamllint
 platforms:
   - name: instance
-    image: "geerlingguy/docker-${MOLECULE_DISTRO:-ubuntu1604}-ansible:latest"
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    image: "ubuntu:bionic"
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
@@ -18,13 +17,11 @@ provisioner:
   lint:
     name: ansible-lint
   playbooks:
-    converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
+    converge: playbook.yml
 scenario:
   name: default
   test_sequence:
     - lint
-    - destroy
-    - syntax
     - create
     - converge
     - idempotence

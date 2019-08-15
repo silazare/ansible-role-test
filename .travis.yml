@@ -18,7 +18,3 @@ before_script:
 
 script:
   - molecule test
-
-#notifications:
-#  slack:
-#    secure: XXXX
