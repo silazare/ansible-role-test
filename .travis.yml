@@ -6,10 +6,10 @@ env:
   global:
     - ROLE_NAME: test
   matrix:
-    - MOLECULE_DISTRO: ubuntu1604
+    - MOLECULE_DISTRO: ubuntu1804
 
 install:
-  - pip install molecule docker
+  - pip install molecule==2.22rc6 docker
 
 before_script:
   - cd ../
@@ -19,6 +19,6 @@ before_script:
 script:
   - molecule test
 
-notifications:
-  slack:
-    secure: NuxYI9tFgVPhepOrQob+pZfSiUClEEwdF2acAnMqnA7zExg76qlqpkIrIBJLihygxPu/oOUhgw9N4DGDXCHcAaT9fgCjpL1na/Wvd4Jaz9WESmkG97FZIFpcYkb+QD4hZcRXfdh+y6zXhwmSH4lFinFohBZfxhJF59ziKnHcmYR9PhnA1I8sZGm7MkivwuiIJ8LO7oI6jDDij/7eQeT6neD0x00SHcLVZZE1MhiMBWOkNM33IBJKScWZLIHxSon5lbDKRdWte7eSv/s+lQ3n9gRj0wfwO2TxJ/t98QPtR6Tm9/+V6yJ7WVnUIH8jE9ZwNVvKjmn9WPoRyoZ103/Voc3UtPix+8aEge1Rgs12S50N3UZb+s2R7v6fJ8hc6AMhDn4VQ5JO/hnJfOsb9uyJAW5lBYeCptAD4FInZavVSQCrPIIyb7jAeXo95IsMhOXO/HNP2HSnvJSNG48XNXTz7XZn/8GpGmWJN55Sfi1yF9Nq1nED4SR01ACw0HWGru67lWzsJhi9XxUDS6XulehBwfnQHuhRg4TVJKLc6UOAzRVnRFRtyCwupebYi5QoIiig0mokiGVv5qYFDFHH6qhrXLADQTp6b0JRtVIsZzvQLUDQZryy+7hI8uOg34ceSWkJ31ubfRKqIKngC7GqL9qzy4VN/Op3rMc/N6eECK8wtvI=
+#notifications:
+#  slack:
+#    secure: XXXX
