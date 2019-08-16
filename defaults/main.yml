@@ -1,5 +1,5 @@
 ---
-mong_version: "4.0"
+mongo_version: "4.0"
 mongo_port: 27017
 mongo_bind_ip: 127.0.0.1
 env: local
