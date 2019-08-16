@@ -18,12 +18,12 @@ node() {
         }
         stage ("Install Application Dependencies") {
             ansiColor('xterm') {
-                sh 'sudo pip install --upgrade ansible==${ANSIBLE_VERSION} molecule==${MOLECULE_VERSION} docker'
+                sh "sudo pip install --upgrade ansible==${ANSIBLE_VERSION} molecule==${MOLECULE_VERSION} docker"
             }
         }
         stage ("Molecule lint") {
             ansiColor('xterm') {
-                if (DEBUG) {
+                if ("${DEBUG}") {
                     sh 'molecule --debug lint'
                 }
                 else {
@@ -33,7 +33,7 @@ node() {
         }
         stage ("Molecule create") {
             ansiColor('xterm') {
-                if (DEBUG) {
+                if ("${DEBUG}") {
                     sh 'molecule --debug create'
                 }
                 else {
@@ -43,7 +43,7 @@ node() {
         }
         stage ("Molecule converge") {
             ansiColor('xterm') {
-                if (DEBUG) {
+                if ("${DEBUG}") {
                     sh 'molecule --debug converge'
                 }
                 else {
@@ -53,7 +53,7 @@ node() {
         }
         stage ("Molecule idemotence") {
             ansiColor('xterm') {
-                if (DEBUG) {
+                if ("${DEBUG}") {
                     sh 'molecule --debug idempotence'
                 }
                 else {
@@ -63,7 +63,7 @@ node() {
         }
         stage ("Molecule verify") {
             ansiColor('xterm') {
-                if (DEBUG) {
+                if ("${DEBUG}") {
                     sh 'molecule --debug verify'
                 }
                 else {
@@ -73,7 +73,7 @@ node() {
         }
         stage ("Molecule destroy") {
             ansiColor('xterm') {
-                if (DEBUG) {
+                if ("${DEBUG}") {
                     sh 'molecule --debug destroy'
                 }
                 else {
