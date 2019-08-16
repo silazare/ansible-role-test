@@ -26,7 +26,6 @@ scenario:
     - prepare
   converge_sequence:
     - converge
-    - idempotence
   destroy_sequence:
     - destroy
   test_sequence:
