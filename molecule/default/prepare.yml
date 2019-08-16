@@ -1,0 +1,18 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install python for Ansible
+      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal python-zipstream)
+      changed_when: false
+
+    - name: Install requirement packages
+      apt:
+        pkg: "{{ item }}"
+        state: present
+        update_cache: true
+      loop:
+        - dirmngr
+        - net-tools

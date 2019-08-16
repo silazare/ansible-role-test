@@ -4,16 +4,5 @@
   become: true
   vars:
     mongo_bind_ip: 0.0.0.0
-
-  pre_tasks:
-    - name: Install requirement packages
-      apt:
-        pkg: "{{ item }}"
-        state: present
-        update_cache: true
-      loop:
-        - dirmngr
-        - net-tools
-
   roles:
     - role: ansible-role-test
