@@ -16,8 +16,7 @@
 
 - name: Install mongodb-org
   apt:
-    pkg: mongodb
-    state: present
+    pkg: mongodb-org
     update_cache: true
     force_apt_get: true    ## workaround to remove apt warnings
   register: mongodb_install_result
@@ -26,8 +25,8 @@
   tags: mongo_install
 
 - name: Enable mongodb service
-  service:
-    name: mongodb
+  systemd:
+    name: mongod
     enabled: true
     state: started
   tags: mongo_install

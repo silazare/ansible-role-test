@@ -17,22 +17,22 @@
 
   - name: Check BindIP
     lineinfile:
-      path: /etc/mongodb.conf
-      regexp: "^bind_ip = "
-      line: "bind_ip = 0.0.0.0"
+      path: /etc/mongod.conf
+      regexp: "^  bindIp:"
+      line: "  bindIp: 0.0.0.0"
     register: "mongodb_conf"
 
-  - name: Assert BindIP status
+  - name: Assert Bind IP status
     assert:
       that:
         - "not mongodb_conf.changed"
-      success_msg: "BindIP test PASSED"
-      fail_msg: "BindIP test FAILED"
+      success_msg: "Bind IP test PASSED"
+      fail_msg: "Bind IP test FAILED"
       quiet: false
 
   - name: Check service status
-    service:
-      name: mongodb
+    systemd:
+      name: mongod
       state: started
     check_mode: true
     register: mongodb_service
@@ -40,7 +40,7 @@
   - name: Assert service status
     assert:
       that:
-        - "not mongodb_service.status.started.changed"
+        - "mongodb_service.status.SubState == 'running'"
       success_msg: "mongodb service test PASSED"
       fail_msg: "mongodb service test FAILED"
       quiet: false
