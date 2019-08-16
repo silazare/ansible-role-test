@@ -1,0 +1,42 @@
+---
+- name: Verify MongoDB
+  hosts: all
+  tasks:
+  - name: Check file exists
+    stat:
+      path: "/etc/hosts"
+    register: hosts_file
+
+  - name: Assert file status
+    assert:
+      that:
+        - "hosts_file.stat.exists"
+      quiet: false
+      success_msg: "hosts file test PASSED"
+      fail_msg: "hosts file test FAILED"
+
+  - name: Check service status
+    service:
+      name: mongodb
+      state: started
+    check_mode: true
+    register: mongodb_service
+
+  - name:
+    debug:
+      msg: "{{ mongodb_service }}"
+
+  - name: Assert service status
+    assert:
+      that:
+        - "not mongodb_service.status.started.changed"
+      success_msg: "mongodb service test PASSED"
+      fail_msg: "mongodb service test FAILED"
+      quiet: false
+
+  - name: Check port status
+    wait_for:
+      host: 0.0.0.0
+      port: 27017
+      state: started
+      timeout: 3

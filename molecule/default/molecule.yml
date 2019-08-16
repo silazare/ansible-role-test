@@ -18,6 +18,7 @@ provisioner:
   playbooks:
     prepare: prepare.yml
     converge: playbook.yml
+    verify: verify.yml
 scenario:
   name: default
   create_sequence:
@@ -37,6 +38,7 @@ scenario:
     - verify
     - destroy
 verifier:
-  name: testinfra
+  name: ansible
+  enabled: true
   lint:
-    name: flake8
+    name: ansible-lint
