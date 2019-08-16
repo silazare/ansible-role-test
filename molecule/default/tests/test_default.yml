@@ -1,0 +1,33 @@
+# Molecule managed
+---
+file:
+  /etc/hosts:
+    exists: true
+    owner: root
+    group: root
+  /etc/mongodb.conf:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+
+package:
+  mongodb-org:
+    installed: true
+    versions:
+      - 4.2.0
+
+service:
+  mongod:
+    enabled: true
+    running: true
+
+process:
+  mongod:
+    running: true
+
+port:
+  tcp:27017:
+    listening: true
+    ip:
+    - 0.0.0.0

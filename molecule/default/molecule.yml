@@ -7,10 +7,17 @@ lint:
   name: yamllint
 platforms:
   - name: instance
-    image: ubuntu:18.04
+    image: leandelivery/docker-systemd:ubuntu-18.04
     privileged: true
+    security_opts:
+      - seccomp=unconfined
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    tmpfs:
+      - /tmp
+      - /run
+    capabilities:
+      - SYS_ADMIN
 provisioner:
   name: ansible
   lint:
@@ -37,6 +44,6 @@ scenario:
     - verify
     - destroy
 verifier:
-  name: testinfra
+  name: goss
   lint:
-    name: flake8
+    name: yamllint
