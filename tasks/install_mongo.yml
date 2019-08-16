@@ -1,12 +1,11 @@
 ---
 - name: Add mongodb-org repo key
   apt_key:
-    keyserver: "keyserver.ubuntu.com"
-    id: "9DA31620334BD75D9DCB49F368818C72E52529D4"
+    url: https://www.mongodb.org/static/pgp/server-4.2.asc
     state: present
   register: mongodb_repo_key_result
   until: mongodb_repo_key_result is success
-  retries: 10
+  retries: 3
   tags: mongo_install
 
 - name: Add mongodb-org repo
@@ -17,17 +16,18 @@
 
 - name: Install mongodb-org
   apt:
-    pkg: mongodb-org
+    pkg: mongodb
     state: present
     update_cache: true
+    force_apt_get: true    ## workaround to remove apt warnings
   register: mongodb_install_result
   until: mongodb_install_result is success
-  retries: 10
+  retries: 3
   tags: mongo_install
 
-- name: Enable mongod service
+- name: Enable mongodb service
   service:
-    name: mongod
+    name: mongodb
     enabled: true
     state: started
   tags: mongo_install

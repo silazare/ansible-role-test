@@ -6,18 +6,11 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: molecule-ubuntu-1804
+  - name: instance
     image: ubuntu:18.04
     privileged: true
-    security_opts:
-      - seccomp=unconfined
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    tmpfs:
-      - /tmp
-      - /run
-    capabilities:
-      - SYS_ADMIN
 provisioner:
   name: ansible
   lint:
@@ -27,6 +20,14 @@ provisioner:
     converge: playbook.yml
 scenario:
   name: default
+  create_sequence:
+    - create
+    - prepare
+  converge_sequence:
+    - converge
+    - idempotence
+  destroy_sequence:
+    - destroy
   test_sequence:
     - lint
     - create

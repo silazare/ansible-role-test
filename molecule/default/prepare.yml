@@ -13,6 +13,12 @@
         pkg: "{{ item }}"
         state: present
         update_cache: true
+        force_apt_get: true    ## workaround to remove apt warnings
       loop:
         - dirmngr
         - net-tools
+        - curl
+        - apt-transport-https
+        - ca-certificates
+        - software-properties-common
+        - gnupg

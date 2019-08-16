@@ -19,7 +19,7 @@ molecule init role -r ansible-role-test -d docker --verifier-name ansible
 molecule init role -r ansible-role-test -d docker --verifier-name testinfra
 ```
 
-- Docker with Goss (goss branch)
+- Docker with Goss (goss branch) *currently outdated*
 ```sh
 molecule init role -r ansible-role-test -d docker --verifier-name goss
 ```
