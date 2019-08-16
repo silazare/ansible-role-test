@@ -15,6 +15,21 @@
       success_msg: "hosts file test PASSED"
       fail_msg: "hosts file test FAILED"
 
+  - name: Check BindIP
+    lineinfile:
+      path: /etc/mongodb.conf
+      regexp: "^bind_ip = "
+      line: "bind_ip = 0.0.0.0"
+    register: "mongodb_conf"
+
+  - name: Assert BindIP status
+    assert:
+      that:
+        - "not mongodb_conf.changed"
+      success_msg: "BindIP test PASSED"
+      fail_msg: "BindIP test FAILED"
+      quiet: false
+
   - name: Check service status
     service:
       name: mongodb
