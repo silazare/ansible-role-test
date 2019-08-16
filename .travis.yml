@@ -1,20 +1,26 @@
 ---
-language: python
-services: docker
+dist: xenial
+sudo: required
 
-env:
-  global:
-    - ROLE_NAME: test
-  matrix:
-    - MOLECULE_DISTRO: ubuntu1804
+language: python
+python:
+  - "2.7"
+
+services: 
+  - docker
+
+before_install:
+  - git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
 
 install:
-  - pip install molecule==2.22rc6 docker
-
-before_script:
-  - cd ../
-  - mv ansible-role-$ROLE_NAME $ROLE_NAME
-  - cd $ROLE_NAME
+  - pip install --upgrade ansible==2.8.3 docker
+  - pip install molecule==2.22rc6
+  - pip install ansible-lint==4.1.0
+  - ansible --version
+  - ansible-lint --version
+  - molecule --version
 
 script:
-  - molecule test
+  - yamllint . -c .yamllint
+  - ansible-lint . -c .ansible-lint
+  - molecule test -s default
