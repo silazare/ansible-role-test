@@ -7,7 +7,7 @@ properties ([
 node() {
     def MOLECULE_VERSION = '2.22rc6'
     def ANSIBLE_VERSION = '2.8.3'
-    def DEBUG = false
+    def DEBUG = true
 
     try {
         stage ("Checkout") {
