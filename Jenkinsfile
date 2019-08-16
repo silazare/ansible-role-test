@@ -14,7 +14,17 @@ node() {
             checkout scm
             ansiColor('xterm') {
                 sh 'git rev-parse HEAD > .git/commit-id'
-            }    
+            }
+            dir ("~/ansible-lint-rules") {
+                checkout scm: [
+                    $class: 'GitSCM',
+                    userRemoteConfigs: [
+                        [url: 'https://github.com/lean-delivery/ansible-lint-rules.git',]
+                    ],
+                    branches: [[name: "master"]]
+                ], 
+                poll: false
+            }
         }
 
         stage ("Install Application Dependencies") {
