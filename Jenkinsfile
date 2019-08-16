@@ -15,7 +15,7 @@ node() {
             ansiColor('xterm') {
                 sh 'git rev-parse HEAD > .git/commit-id'
             }
-            dir ("/var/lib/jenkins/ansible-lint-rules") {
+            dir ("ansible-lint-rules") {
                 checkout scm: [
                     $class: 'GitSCM',
                     userRemoteConfigs: [
