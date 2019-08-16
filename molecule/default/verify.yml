@@ -22,10 +22,6 @@
     check_mode: true
     register: mongodb_service
 
-  - name:
-    debug:
-      msg: "{{ mongodb_service }}"
-
   - name: Assert service status
     assert:
       that:
