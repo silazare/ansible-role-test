@@ -7,7 +7,7 @@ properties ([
 node() {
     def MOLECULE_VERSION = '2.22rc6'
     def ANSIBLE_VERSION = '2.8.3'
-    def DEBUG = true
+    def DEBUG = false
 
     try {
         stage ("Checkout") {
@@ -16,11 +16,13 @@ node() {
                 sh 'git rev-parse HEAD > .git/commit-id'
             }    
         }
+
         stage ("Install Application Dependencies") {
             ansiColor('xterm') {
                 sh "sudo pip install --upgrade ansible==${ANSIBLE_VERSION} molecule==${MOLECULE_VERSION} docker"
             }
         }
+
         stage ("Molecule lint") {
             ansiColor('xterm') {
                 if (DEBUG) {
@@ -31,6 +33,7 @@ node() {
                 }
             }
         }
+
         stage ("Molecule create") {
             ansiColor('xterm') {
                 if (DEBUG) {
@@ -41,6 +44,7 @@ node() {
                 }
             }
         }
+
         stage ("Molecule converge") {
             ansiColor('xterm') {
                 if (DEBUG) {
@@ -51,26 +55,32 @@ node() {
                 }
             }
         }
-        stage ("Molecule idemotence") {
-            ansiColor('xterm') {
-                if (DEBUG) {
-                    sh 'molecule --debug idempotence'
-                }
-                else {
-                    sh 'molecule idempotence'
-                }
-            }
+
+        stage("Molecule test") {
+            parallel (
+                'Idempotence test': {
+                    ansiColor('xterm') {
+                        if (DEBUG) {
+                            sh 'molecule --debug idempotence'
+                        }
+                        else {
+                            sh 'molecule idempotence'
+                        }
+                    }
+                },
+                'Verification test': {
+                    ansiColor('xterm') {
+                        if (DEBUG) {
+                            sh 'molecule --debug verify'
+                        }
+                        else {
+                            sh 'molecule verify'
+                        }
+                    }
+                },
+            )
         }
-        stage ("Molecule verify") {
-            ansiColor('xterm') {
-                if (DEBUG) {
-                    sh 'molecule --debug verify'
-                }
-                else {
-                    sh 'molecule verify'
-                }
-            }
-        }
+
         stage ("Molecule destroy") {
             ansiColor('xterm') {
                 if (DEBUG) {
