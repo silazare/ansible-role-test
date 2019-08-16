@@ -10,7 +10,7 @@ services:
   - docker
 
 before_install:
-  - git clone https://github.com/lean-delivery/ansible-lint-rules.git ~/ansible-lint-rules
+  - git clone https://github.com/lean-delivery/ansible-lint-rules.git ./ansible-lint-rules
 
 install:
   - pip install --upgrade ansible==2.8.3 docker
