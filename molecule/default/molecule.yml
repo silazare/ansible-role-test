@@ -6,7 +6,7 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: molecule-ubuntu1804
+  - name: molecule-ubuntu-1804
     image: ubuntu:18.04
     privileged: true
     security_opts:

@@ -9,5 +9,5 @@
   register: db_internal_ip
   when: gce_private_ip is defined
 
-- include: install_mongo.yml
-- include: config_mongo.yml
+- import_tasks: install_mongo.yml
+- import_tasks: config_mongo.yml
