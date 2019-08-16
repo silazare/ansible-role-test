@@ -1,8 +1,8 @@
-Ansible role testing example with Molecule
+Ansible MongoDB role testing example with Molecule
 =========
 [![Build status](https://travis-ci.org/silazare/ansible-role-test.svg?branch=master)](https://travis-ci.org/silazare)
 
-## Prerequisites:
+## Requirements:
 
 - Ansible =>2.8
 - Molecule =>2.22rc6

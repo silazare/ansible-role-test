@@ -4,6 +4,10 @@
     keyserver: hkp://keyserver.ubuntu.com
     id: 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
     state: present
+  register: mongodb_repo_key_result
+  until: mongodb_repo_key_result is success
+  retries: 10
+  delay: 2
   tags: mongo_install
 
 - name: Add mongodb-org repo
@@ -17,6 +21,10 @@
     pkg: mongodb-org
     state: present
     update_cache: true
+  register: mongodb_install_result
+  until: mongodb_install_result is success
+  retries: 10
+  delay: 2
   tags: mongo_install
 
 - name: Enable mongod service
