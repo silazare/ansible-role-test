@@ -4,8 +4,8 @@
   gather_facts: false
   become: true
   tasks:
-    - name: Install python for Ansible
-      raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal python-zipstream)
+    - name: Install python3.6 for Ansible
+      raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3-minimal python3-zipstream)
       changed_when: false
 
     - name: Install requirement packages
@@ -20,3 +20,4 @@
         - curl
         - apt-transport-https
         - software-properties-common
+        - python3-apt

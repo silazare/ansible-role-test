@@ -8,8 +8,8 @@ Ansible MongoDB role testing example with Molecule
 
 ## Requirements:
 
-- Ansible =>2.8
-- Molecule =>2.22rc6
+- Ansible =>2.89
+- Molecule =>2.22<3.x
 - Goss =>3.6.7
 
 ## Molecule initialize examples:
