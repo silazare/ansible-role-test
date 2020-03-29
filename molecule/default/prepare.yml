@@ -20,3 +20,4 @@
         - curl
         - apt-transport-https
         - software-properties-common
+        - python3-apt
