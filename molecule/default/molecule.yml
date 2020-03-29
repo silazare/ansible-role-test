@@ -18,6 +18,9 @@ platforms:
       - /run
     capabilities:
       - SYS_ADMIN
+    groups:
+      - debian_family
+      - python3
 provisioner:
   name: ansible
   lint:
@@ -25,6 +28,10 @@ provisioner:
   playbooks:
     prepare: prepare.yml
     converge: playbook.yml
+  inventory:
+    group_vars:
+      python3:
+        ansible_python_interpreter: /usr/bin/python3
 scenario:
   name: default
   create_sequence:
@@ -43,6 +50,7 @@ scenario:
     - verify
     - destroy
 verifier:
-  name: testinfra
+  name: ansible
+  enabled: true
   lint:
-    name: flake8
+    name: ansible-lint

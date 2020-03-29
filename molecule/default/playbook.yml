@@ -5,4 +5,4 @@
   vars:
     mongo_bind_ip: 0.0.0.0
   roles:
-    - role: ansible-role-test
+    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
