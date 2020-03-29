@@ -18,6 +18,9 @@ platforms:
       - /run
     capabilities:
       - SYS_ADMIN
+    groups:
+      - debian_family
+      - python3
 provisioner:
   name: ansible
   lint:
