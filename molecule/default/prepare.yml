@@ -8,6 +8,14 @@
       raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3-minimal python3-zipstream)
       changed_when: false
 
+    - name: Make sure /root/.ansible/tmp folder created
+      file:
+        path: /root/.ansible/tmp
+        state: directory
+        owner: root
+        group: root
+        mode: '0700'
+
     - name: Install requirement packages
       apt:
         pkg: "{{ item }}"

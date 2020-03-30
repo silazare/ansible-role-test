@@ -9,22 +9,11 @@ Ansible MongoDB role testing example with Molecule
 ## Requirements:
 
 - Ansible =>2.9
-- Molecule =>2.22<3.x
-- Goss =>3.6.7
+- Molecule =>=3.0.2
 
-## Molecule initialize examples:
+## Molecule initialize example:
 
-- Docker with Ansible verifier (master branch)
+- Docker with Ansible verifier
 ```sh
-molecule init role -r ansible-role-test -d docker --verifier-name ansible
-```
-
-- Docker with default Testinfra (testinfra branch)
-```sh
-molecule init role -r ansible-role-test -d docker --verifier-name testinfra
-```
-
-- Docker with Goss (goss branch)
-```sh
-molecule init role -r ansible-role-test -d docker --verifier-name goss
+molecule init role -r ansible-role-test -d docker
 ```

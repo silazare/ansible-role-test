@@ -3,8 +3,10 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint . -c .yamllint
+  ansible-lint -c .ansible-lint
 platforms:
   - name: instance
     image: leandelivery/docker-systemd:ubuntu-18.04
@@ -23,11 +25,9 @@ platforms:
       - python3
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
   playbooks:
     prepare: prepare.yml
-    converge: playbook.yml
+    converge: converge.yml
   inventory:
     group_vars:
       python3:
@@ -51,6 +51,3 @@ scenario:
     - destroy
 verifier:
   name: ansible
-  enabled: true
-  lint:
-    name: ansible-lint
