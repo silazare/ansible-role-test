@@ -15,7 +15,7 @@ package:
   mongodb-org:
     installed: true
     versions:
-      - 4.2.0
+      - 4.2.5
 
 service:
   mongod:
