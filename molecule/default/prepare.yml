@@ -29,3 +29,6 @@
         - apt-transport-https
         - software-properties-common
         - python3-apt
+      register: requirement_packages_result
+      until: requirement_packages_result is success
+      retries: 3
